@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E0F2F7"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/img_20250617_wa0008"
+        />
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="73dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#4CAF50"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        app:icon="@android:drawable/ic_menu_rotate"
+        app:iconSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="84dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="#FB008D"
+        android:drawableTint="#FFFFFF"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:icon="@android:drawable/ic_delete"
+        app:iconGravity="textEnd"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:iconTintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.501" />
+
+    <ImageButton
+        android:id="@+id/btnForward"
+        android:layout_width="84dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="184dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Descrição da imagem do botão"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cima"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnBackward"
+        android:layout_width="84dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="184dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Descrição da imagem do botão"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baixo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.49" />
+
+    <ImageButton
+        android:id="@+id/btnRight"
+        android:layout_width="84dp"
+        android:layout_height="92dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Descrição da imagem do botão"
+        android:scaleType="centerCrop"
+        android:src="@drawable/direita"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnLeft"
+        android:layout_width="84dp"
+        android:layout_height="92dp"
+        android:layout_marginEnd="100dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Descrição da imagem do botão"
+        android:scaleType="centerCrop"
+        android:src="@drawable/esquerda"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="38dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bluetooth"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
