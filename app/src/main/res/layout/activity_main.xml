@@ -14,7 +14,8 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/img_20250617_wa0008"
-        />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/btnConnect"
@@ -28,56 +29,38 @@
         app:icon="@android:drawable/ic_menu_rotate"
         app:iconSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnStop"
-        android:layout_width="84dp"
-        android:layout_height="92dp"
-        android:layout_marginStart="8dp"
-        android:backgroundTint="#FB008D"
-        android:drawableTint="#FFFFFF"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:icon="@android:drawable/ic_delete"
-        app:iconGravity="textEnd"
-        app:iconPadding="0dp"
-        app:iconSize="30dp"
-        app:iconTintMode="src_in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+        android:contentDescription="Botão conectar/desconectar Bluetooth"
+        android:scaleType="centerInside"/>
 
     <ImageButton
         android:id="@+id/btnForward"
         android:layout_width="84dp"
         android:layout_height="92dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginBottom="110dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Descrição da imagem do botão"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:src="@drawable/cima"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
 
     <ImageButton
         android:id="@+id/btnBackward"
         android:layout_width="84dp"
         android:layout_height="92dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="110dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Descrição da imagem do botão"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:src="@drawable/baixo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnRight"
@@ -86,27 +69,23 @@
         android:layout_marginEnd="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Descrição da imagem do botão"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:src="@drawable/direita"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnLeft"
         android:layout_width="84dp"
         android:layout_height="92dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="110dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Descrição da imagem do botão"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:src="@drawable/esquerda"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -118,6 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bluetooth"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:scaleType="centerInside"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

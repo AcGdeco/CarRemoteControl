@@ -7,7 +7,10 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -44,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
     private OutputStream outputStream = null;          // Stream para enviar dados para o ESP32
 
     // Elementos da Interface do Usuário (UI)
-    private Button btnConnect, btnStop;
+    private Button btnConnect;
     private ImageButton btnForward, btnBackward, btnLeft, btnRight;
     private ImageView bluetoothStatusImageView;
+
+    // Handler para gerenciar o envio repetitivo de comandos (para manter o botão pressionado)
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Runnable sendRepeatCommandRunnable;
+    private char currentContinuousCommand = ' '; // Armazena o comando que está sendo enviado continuamente
 
     // Launcher para solicitar permissões de Bluetooth em tempo de execução (para Android 6.0+)
     private ActivityResultLauncher<String[]> requestPermissionsLauncher;
@@ -62,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         btnBackward = findViewById(R.id.btnBackward);
         btnLeft = findViewById(R.id.btnLeft);
         btnRight = findViewById(R.id.btnRight);
-        btnStop = findViewById(R.id.btnStop);
         bluetoothStatusImageView = findViewById(R.id.imageView3);
 
         // Desabilita os botões de controle de movimento até que o Bluetooth esteja conectado
@@ -116,12 +123,59 @@ public class MainActivity extends AppCompatActivity {
 
         // Configura os listeners para os botões de controle do carrinho.
         // Cada botão enviará um caractere específico para o ESP32.
-        btnForward.setOnClickListener(v -> sendCommand('F')); // 'F' para Frente
-        btnBackward.setOnClickListener(v -> sendCommand('R')); // 'R' para Trás
-        btnLeft.setOnClickListener(v -> sendCommand('E'));     // 'E' para Esquerda
-        btnRight.setOnClickListener(v -> sendCommand('D'));   // 'D' para Direita
-        btnStop.setOnClickListener(v -> sendCommand('-'));     // '-' para Parar
+        // OnTouchListener para os botões de MOVIMENTO (Enviar enquanto pressionado, Parar ao soltar)
+        View.OnTouchListener movementButtonTouchListener = (v, event) -> {
+            char commandToSend = ' ';
 
+            // Determina o comando e nome com base no ID do botão
+            int id = v.getId();
+            if (id == R.id.btnForward) {
+                commandToSend = 'F';
+            } else if (id == R.id.btnBackward) {
+                commandToSend = 'B';
+            } else if (id == R.id.btnLeft) {
+                commandToSend = 'L';
+            } else if (id == R.id.btnRight) {
+                commandToSend = 'R';
+            }
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN: // Botão pressionado
+                    if (outputStream != null) {
+                        currentContinuousCommand = commandToSend;
+                        // Inicia o envio contínuo do comando
+                        sendRepeatCommandRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Envia o comando atual (F, B, L, R)
+                                sendCommand(currentContinuousCommand);
+                                // Repete o envio a cada 100ms
+                                handler.postDelayed(this, 100);
+                            }
+                        };
+                        handler.post(sendRepeatCommandRunnable); // Inicia o envio imediatamente
+                    } else {
+                        Toast.makeText(this, "Bluetooth não conectado. Por favor, conecte primeiro.", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+                case MotionEvent.ACTION_UP: // Botão solto
+                case MotionEvent.ACTION_CANCEL: // Evento cancelado (ex: dedo escorregou)
+                    handler.removeCallbacks(sendRepeatCommandRunnable); // Para de repetir o envio
+                    if (outputStream != null) {
+                        sendCommand('S'); // Envia o comando de parar ('S')
+                    }
+                    currentContinuousCommand = ' '; // Reseta o comando contínuo
+                    break;
+            }
+            return true; // Consume o evento de toque
+        };
+
+        // Aplica o OnTouchListener aos botões de movimento
+        btnForward.setOnTouchListener(movementButtonTouchListener);
+        btnBackward.setOnTouchListener(movementButtonTouchListener);
+        btnLeft.setOnTouchListener(movementButtonTouchListener);
+        btnRight.setOnTouchListener(movementButtonTouchListener);
     }
 
     /**
@@ -317,7 +371,6 @@ public class MainActivity extends AppCompatActivity {
         btnBackward.setEnabled(enabled);
         btnLeft.setEnabled(enabled);
         btnRight.setEnabled(enabled);
-        btnStop.setEnabled(enabled);
     }
 
     @Override
